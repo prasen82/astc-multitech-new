@@ -41,6 +41,27 @@
                             <td style="border:1px solid gray;text-align:center;"><?=$lg['location']?></td>
                         </tr>
                         <tr>
+                            <td style="border:1px solid gray;">Bank Name :</td>
+                            <td style="border:1px solid gray;text-align:center;">ASSAM GRAMIN VIKASH BANK</td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid gray;">Bank A/c No :</td>
+                            <td style="border:1px solid gray;text-align:center;"><?=$lg['bank_ac_no']?></td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid gray;">IFSC Code :</td>
+                            <td style="border:1px solid gray;text-align:center;"><?=$lg['ifsc_code']?></td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid gray;">PF No :</td>
+                            <td style="border:1px solid gray;text-align:center;"><?=$lg['pf_ac_no']?></td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid gray;">ESIC No :</td>
+                            <td style="border:1px solid gray;text-align:center;"><?=$lg['esi_ac_no']?></td>
+                        </tr>
+                        
+                        <tr>
                             <td style="border:1px solid gray;">No of Days of Work :</td>
                             <td style="border:1px solid gray;text-align:right;padding-right:20px;"><?=$lg['total_salary_days']?></td>
                         </tr>

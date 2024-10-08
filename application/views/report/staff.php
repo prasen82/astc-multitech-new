@@ -82,7 +82,9 @@
                                 <th class="text-center">Balance</th>
 
                                  <?php } ?>  
-                                 <th <?=(($type=='c' || $type=='d')?"":"hidden")?> class="text-center text-danger">Off Day</th>   
+                                 <th <?=(($type=='c' || $type=='d')?"":"hidden")?> class="text-center text-danger">Off Day</th>  
+                                 <th <?=(($type=='c' || $type=='d'|| $type=='s')?"":"hidden")?> class="text-center">Date of Joining</th>   
+ 
                              <th>Status</th>                          
                                                           
                                
@@ -127,6 +129,8 @@
                                         
                                     <?php } ?>    
                                     <td <?=(($type=='c' || $type=='d')?"":"hidden")?> class="text-center text-danger"><?=$st['off_day']?></td>  
+                                    <td <?=(($type=='c' || $type=='d' || $type=='s')?"":"hidden")?> class="text-center"><?= $st['joining_date'] ?></td>   
+
                                     <td>
                                         <?php if($st['status']==1) { ?>
                                         <span class="badge bg-success">Active</span>

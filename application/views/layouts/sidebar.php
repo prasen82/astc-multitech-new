@@ -67,6 +67,14 @@
                     <span data-key="t-dashboard">Rebate</span>
                 </a>
                 </li>
+                <li>
+                
+                <a href="#" onclick="go('receipt')">
+
+                    <i class="fa fa-recycle" style="font-size:14pt;"></i>
+                    <span data-key="t-dashboard">Receipt</span>
+                </a>
+                </li>
 
                 <?php } ?>
                 <?php 
@@ -201,7 +209,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                     <?php 
                 
-                        if($this->session->userdata('multitech_role_id')<3) { ?>
+                        if($this->session->userdata('multitech_role_id')<3 || $this->session->userdata('multitech_role_id')==5) { ?>
                 
                          <li><a href="#" onclick="go('logsheet')" data-key="t-lightbox">Logsheet Report</a></li>
                          <li><a href="#" onclick="go('transactions')" data-key="t-lightbox">Transaction History</a></li>

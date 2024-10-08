@@ -502,6 +502,24 @@ class Master extends CI_Controller {
        
         $this->load->view('layouts/footer');
     }
+
+    public function receipt_() {
+        $data['page_name'] = 'Receipt';
+       
+        $user_id = $this->session->userdata('multitech_uid');
+
+ 
+        $data['transaction_type'] = 5;   
+
+      
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/sidebar');
+        $this->load->view('master/advance_payment', $data);
+       
+        $this->load->view('layouts/footer');
+    }
+
+
     public function payment()
     {
        $d=$this->input->post();
@@ -518,7 +536,7 @@ class Master extends CI_Controller {
         // $this->db->query($sql);
 
        }
-       else {
+       else if($d['type']==2){
         
         $sql="INSERT INTO `staff_transaction`( `staff_id`, `credit`, `remarks`,transaction_type) VALUES ('".$d['driver_id']."','".$d['amount']."','".$d['remarks']."','".$d['type']."')";
         $this->db->query($sql);
@@ -528,7 +546,14 @@ class Master extends CI_Controller {
         // should be reflacted on draft salary bill in rebate on advance payment
         $sql="UPDATE `salary_bill_master` SET `advance_deduction`=`advance_deduction`-".$d['amount'].",`total_deduction`=`total_deduction`-".$d['amount'].",`net_salary_payable`=`net_salary_payable`+".$d['amount']." WHERE `staff_id`='".$d['driver_id']."' and is_final=0";
         $this->db->query($sql);
-
+       }
+       else {        
+        $sql="INSERT INTO `staff_transaction`( `staff_id`, `credit`, `remarks`,transaction_type) VALUES ('".$d['driver_id']."','".$d['amount']."','".$d['remarks']."','".$d['type']."')";
+        $this->db->query($sql);       
+        $sql="UPDATE `staff_master` SET `balance`=`balance`-".$d['amount'].",status=IF(`balance`-".$d['amount']."<5000,1,status), block_reason='' WHERE `staff_id`='".$d['driver_id']."'";
+      
+        $this->db->query($sql);
+   
        }
           
       
@@ -598,9 +623,69 @@ class Master extends CI_Controller {
      
         $this->load->view('layouts/header');
         $this->load->view('layouts/sidebar');
-        $this->load->view('report/printpayslip', $data);
+        $this->load->view('report/printpayslip', $data);    
+        
         $this->load->view('layouts/footer');
     }
+
+    public function print_receipt() {
+        
+        $d=$this->input->post();
+
+    
+      
+        $dname=$d_contact= $cname=$c_contact=$d_receipt_no=$c_receipt_no=$d_empid=$c_empid="";
+        $d_amount=$c_amount=0;
+        $dt="";
+     
+        $user_id = $this->session->userdata('multitech_uid');
+        $sql="SELECT s.employee_id,transaction_id,s.name,s.contact_no,t.credit, DATE_FORMAT(t.date,'%d-%m-%Y %h:%i %p') as dt,s.type FROM staff_transaction t INNER JOIN staff_master s on t.staff_id=s.staff_id WHERE credit>0 and `log_id`='".$d['log_id_r']."'";
+        $query = $this->db->query($sql)->result_array();
+        foreach ($query as $rs) {
+           $dt=$rs['dt'];
+           if($rs['type']=='d')
+           {
+            $dname=$rs['name'];
+            $d_contact=$rs['contact_no'];
+            $d_empid=$rs['employee_id'];
+
+            $d_amount=$rs['credit'];
+            $d_receipt_no=$rs['transaction_id'];
+
+           }
+           else {
+            $cname=$rs['name'];
+            $c_contact=$rs['contact_no'];
+            $c_empid=$rs['employee_id'];
+
+            $c_amount=$rs['credit'];
+            $c_receipt_no=$rs['transaction_id'];
+
+           }
+
+        }
+        $data['d_empid']=$d_empid;      
+        $data['c_empid']=$c_empid;
+
+        $data['date']=$dt;
+        $data['dname']=$dname;
+        $data['d_contact']=$d_contact;
+        $data['d_amount']=$d_amount;
+        $data['d_receipt_no']=$d_receipt_no;
+
+        $data['cname']=$cname;
+        $data['c_contact']=$c_contact;
+        $data['c_amount']=$c_amount;      
+        $data['c_receipt_no']=$c_receipt_no;
+
+    
+        $data['type']="closing";
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/sidebar');
+        $this->load->view('report/printreceipt', $data);        
+        $this->load->view('layouts/footer');
+    }
+
 
     public function bus() {
         $data['page_name'] = 'Bus Setup';
@@ -623,7 +708,7 @@ class Master extends CI_Controller {
         $user_id = $this->session->userdata('multitech_uid');
 
         $d=$this->input->post();
-        $sql="UPDATE `staff_master` SET `status`='".$d['status']."',`block_reason`='".$d['reason']."',`block_date`=CURDATE() WHERE `staff_id`='".$d['staff_id']."'";
+        $sql="UPDATE `staff_master` SET `status`='".$d['status']."',`block_reason`='".$d['reason']."',`block_date`=CURDATE(),`high_pending_block_status`=0 WHERE `staff_id`='".$d['staff_id']."'";
         $this->db->query($sql);
 
         $sql="INSERT INTO `staff_block_history`(`staff_id`, `reason`, `block_by`) VALUES ('".$d['staff_id']."','".$d['reason']."','".$user_id."')";
@@ -676,7 +761,7 @@ class Master extends CI_Controller {
     public function view_employee()
     {
         $d=$this->input->post();
-        $sql="SELECT * FROM `staff_master` WHERE `name` like '%".$d['search']."%'  and status=1";
+        $sql="SELECT * FROM `staff_master` WHERE `name` like '%".$d['search']."%' ";
         $query=$this->db->query($sql);
         echo json_encode($query->result_array());
     }
@@ -813,7 +898,7 @@ class Master extends CI_Controller {
             else {
                 if($d['emp_id']=="")
                 {
-                    $cr=($d['type']=='d'?"MEC/D/":($d['type']=='C'?"MEC/C/":($d['type']=='s'?"MEC/SW/":'')));
+                    $cr=($d['type']=='d'?"MEC/D/":($d['type']=='c'?"MEC/C/":($d['type']=='s'?"MEC/SW/":'')));
                     $n=strlen($cr)+1;
                     $sql="SELECT MAX(CAST(SUBSTR(`employee_id`,".$n.") as UNSIGNED))+1 as empid FROM `staff_master` WHERE employee_id LIKE '".$cr."%'";
                     // echo $sql;

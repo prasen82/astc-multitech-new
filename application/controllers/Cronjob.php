@@ -112,8 +112,8 @@ class Cronjob extends CI_Controller {
             $employers_pf_contribution=round($total_wages_payable*$percentage_of_pf_employer_contribution/100,2);
        
 
-            $sql="INSERT INTO `salary_bill_master`( `bill_date`, `bill_month`, `staff_id`, `designation`, `emp_id`, `location`, `bank_ac_no`, `ifsc_code`, `pf_ac_no`, `esi_ac_no`, `no_of_days_work`, `total_working_days`, `total_salary_days`, `montly_basic_wages`, `daily_basic_wages`, `total_wages_payable`, `leave_wages`, `bonus`, `allowance`, `gross_income`, `pf_deduction`, `esic_deduction`, `p_tax`, `advance_deduction`, `total_deduction`, `net_salary_payable`, `eployers_pf_contribution`, `eployers_esic_contribution`,`employee_type`) 
-            VALUES ('".$cur_date."','".$salary_month."','".$rs['sid']."','Driver','".$rs['employee_id']."','".$rs['location_of_work']."','".$rs['bank_ac_no']."','".$rs['ifsc_code']."','".$rs['pf_ac_no']."','".$rs['esi_ac_no']."','".$no_of_working_days."','".$no_of_working_days."','".$total_salary_days."','".$rs['monthly_basic_wages']."','".$rs['daily_basic_wages']."','".$total_wages_payable."','".$leave_wages."','".$bonus."','".$allowance."','".$gross."','".$pf_deduction."','".$esic_deduction."','".$p_tax."','".$advance."','".$total_deduction."','".$net_payable."','".$employers_pf_contribution."','".$employers_esic_contribution."','".$rs['type']."')";
+            $sql="INSERT INTO `salary_bill_master`( `bill_date`, `bill_month`, `staff_id`, `designation`, `emp_id`, `location`, `bank_ac_no`, `ifsc_code`, `pf_ac_no`, `esi_ac_no`, `no_of_days_work`, `total_working_days`, `total_salary_days`, `montly_basic_wages`, `daily_basic_wages`, `total_wages_payable`, `leave_wages`, `bonus`, `allowance`, `gross_income`, `pf_deduction`, `esic_deduction`, `p_tax`, `advance_deduction`, `total_deduction`, `net_salary_payable`, `eployers_pf_contribution`, `eployers_esic_contribution`,`employee_type`,`actual_balance_as_on_date`) 
+            VALUES ('".$cur_date."','".$salary_month."','".$rs['sid']."','Driver','".$rs['employee_id']."','".$rs['location_of_work']."','".$rs['bank_ac_no']."','".$rs['ifsc_code']."','".$rs['pf_ac_no']."','".$rs['esi_ac_no']."','".$no_of_working_days."','".$no_of_working_days."','".$total_salary_days."','".$rs['monthly_basic_wages']."','".$rs['daily_basic_wages']."','".$total_wages_payable."','".$leave_wages."','".$bonus."','".$allowance."','".$gross."','".$pf_deduction."','".$esic_deduction."','".$p_tax."','".$advance."','".$total_deduction."','".$net_payable."','".$employers_pf_contribution."','".$employers_esic_contribution."','".$rs['type']."','".$rs['balance']."')";
         //    echo $sql;
            $this->db->query($sql);
     }
@@ -165,8 +165,8 @@ class Cronjob extends CI_Controller {
             $employers_pf_contribution=round($total_wages_payable*$percentage_of_pf_employer_contribution/100,2);
         
 
-            $sql="INSERT INTO `salary_bill_master`( `bill_date`, `bill_month`, `staff_id`, `designation`, `emp_id`, `location`, `bank_ac_no`, `ifsc_code`, `pf_ac_no`, `esi_ac_no`, `no_of_days_work`, `total_working_days`, `total_salary_days`, `montly_basic_wages`, `daily_basic_wages`, `total_wages_payable`, `leave_wages`, `bonus`, `allowance`, `gross_income`, `pf_deduction`, `esic_deduction`, `p_tax`, `advance_deduction`, `total_deduction`, `net_salary_payable`, `eployers_pf_contribution`, `eployers_esic_contribution`,`employee_type`) 
-            VALUES ('".$cur_date."','".$salary_month."','".$rs['sid']."','Conductor','".$rs['employee_id']."','".$rs['location_of_work']."','".$rs['bank_ac_no']."','".$rs['ifsc_code']."','".$rs['pf_ac_no']."','".$rs['esi_ac_no']."','".$no_of_working_days."','".$no_of_working_days."','".$total_salary_days."','".$rs['monthly_basic_wages']."','".$rs['daily_basic_wages']."','".$total_wages_payable."','".$leave_wages."','".$bonus."','".$allowance."','".$gross."','".$pf_deduction."','".$esic_deduction."','".$p_tax."','".$advance."','".$total_deduction."','".$net_payable."','".$employers_pf_contribution."','".$employers_esic_contribution."','".$rs['type']."')";
+            $sql="INSERT INTO `salary_bill_master`( `bill_date`, `bill_month`, `staff_id`, `designation`, `emp_id`, `location`, `bank_ac_no`, `ifsc_code`, `pf_ac_no`, `esi_ac_no`, `no_of_days_work`, `total_working_days`, `total_salary_days`, `montly_basic_wages`, `daily_basic_wages`, `total_wages_payable`, `leave_wages`, `bonus`, `allowance`, `gross_income`, `pf_deduction`, `esic_deduction`, `p_tax`, `advance_deduction`, `total_deduction`, `net_salary_payable`, `eployers_pf_contribution`, `eployers_esic_contribution`,`employee_type`,`actual_balance_as_on_date`) 
+            VALUES ('".$cur_date."','".$salary_month."','".$rs['sid']."','Conductor','".$rs['employee_id']."','".$rs['location_of_work']."','".$rs['bank_ac_no']."','".$rs['ifsc_code']."','".$rs['pf_ac_no']."','".$rs['esi_ac_no']."','".$no_of_working_days."','".$no_of_working_days."','".$total_salary_days."','".$rs['monthly_basic_wages']."','".$rs['daily_basic_wages']."','".$total_wages_payable."','".$leave_wages."','".$bonus."','".$allowance."','".$gross."','".$pf_deduction."','".$esic_deduction."','".$p_tax."','".$advance."','".$total_deduction."','".$net_payable."','".$employers_pf_contribution."','".$employers_esic_contribution."','".$rs['type']."','".$rs['balance']."')";
         //    echo $sql;
            $this->db->query($sql);
     }
@@ -216,8 +216,8 @@ class Cronjob extends CI_Controller {
             $employers_pf_contribution=round($total_wages_payable*$percentage_of_pf_employer_contribution/100,2);
 
 
-            $sql="INSERT INTO `salary_bill_master`( `bill_date`, `bill_month`, `staff_id`, `designation`, `emp_id`, `location`, `bank_ac_no`, `ifsc_code`, `pf_ac_no`, `esi_ac_no`, `no_of_days_work`, `total_working_days`, `total_salary_days`, `montly_basic_wages`, `daily_basic_wages`, `total_wages_payable`, `leave_wages`, `bonus`, `allowance`, `gross_income`, `pf_deduction`, `esic_deduction`, `p_tax`, `advance_deduction`, `total_deduction`, `net_salary_payable`, `eployers_pf_contribution`, `eployers_esic_contribution`,`employee_type`) 
-            VALUES ('".$cur_date."','".$salary_month."','".$rs['sid']."','".$rs['designation']."','".$rs['employee_id']."','".$rs['location_of_work']."','".$rs['bank_ac_no']."','".$rs['ifsc_code']."','".$rs['pf_ac_no']."','".$rs['esi_ac_no']."','".$no_of_working_days."','".$no_of_working_days."','".$total_salary_days."','".$rs['monthly_basic_wages']."','".$rs['daily_basic_wages']."','".$total_wages_payable."','".$leave_wages."','".$bonus."','".$allowance."','".$gross."','".$pf_deduction."','".$esic_deduction."','".$p_tax."','".$advance."','".$total_deduction."','".$net_payable."','".$employers_pf_contribution."','".$employers_esic_contribution."','".$rs['type']."')";
+            $sql="INSERT INTO `salary_bill_master`( `bill_date`, `bill_month`, `staff_id`, `designation`, `emp_id`, `location`, `bank_ac_no`, `ifsc_code`, `pf_ac_no`, `esi_ac_no`, `no_of_days_work`, `total_working_days`, `total_salary_days`, `montly_basic_wages`, `daily_basic_wages`, `total_wages_payable`, `leave_wages`, `bonus`, `allowance`, `gross_income`, `pf_deduction`, `esic_deduction`, `p_tax`, `advance_deduction`, `total_deduction`, `net_salary_payable`, `eployers_pf_contribution`, `eployers_esic_contribution`,`employee_type`,`actual_balance_as_on_date`) 
+            VALUES ('".$cur_date."','".$salary_month."','".$rs['sid']."','".$rs['designation']."','".$rs['employee_id']."','".$rs['location_of_work']."','".$rs['bank_ac_no']."','".$rs['ifsc_code']."','".$rs['pf_ac_no']."','".$rs['esi_ac_no']."','".$no_of_working_days."','".$no_of_working_days."','".$total_salary_days."','".$rs['monthly_basic_wages']."','".$rs['daily_basic_wages']."','".$total_wages_payable."','".$leave_wages."','".$bonus."','".$allowance."','".$gross."','".$pf_deduction."','".$esic_deduction."','".$p_tax."','".$advance."','".$total_deduction."','".$net_payable."','".$employers_pf_contribution."','".$employers_esic_contribution."','".$rs['type']."','".$rs['balance']."')";
         //    echo $sql;
            $this->db->query($sql);
     }
@@ -243,19 +243,49 @@ class Cronjob extends CI_Controller {
         }
     }
 
+    public function balance_update_till_date()
+    {
+        $sql="SELECT s.staff_id,sum(debit),sum(credit),ROUND((sum(debit)-sum(credit)),2) as balance FROM staff_transaction t INNER JOIN	staff_master s on s.staff_id=t.staff_id WHERE t.date<'2024-10-01'   GROUP BY s.staff_id";
+        $query=$this->db->query($sql)->result_array();
+        foreach ($query as $r) {
+            $sql="UPDATE `staff_master` SET `balance`= '".$r['balance']."' WHERE `staff_id`='".$r['staff_id']."'";
+            $this->db->query($sql);
+        }
+        {
+
+        }
+    }
+
     // 
     public function block_high_pending_driver_conductor()
     {
         $cur_date = Date("Y-m"); 
-        $sql="SELECT staff_id,sum(debit)-sum(credit) as pending FROM `staff_transaction` WHERE `transaction_type`=0 and DATE_FORMAT(`date`,'%Y-%m')='".$cur_date."'  GROUP BY staff_id having (sum(debit)-sum(credit))>5000 ORDER BY `pending`  DESC";
+        // $sql="SELECT staff_id,sum(debit)-sum(credit) as pending FROM `staff_transaction` WHERE `transaction_type`=0 and DATE_FORMAT(`date`,'%Y-%m')='".$cur_date."'  GROUP BY staff_id having (sum(debit)-sum(credit))>5000 ORDER BY `pending`  DESC";
+        $sql="SELECT staff_id,sum(debit)-sum(credit) as pending FROM `staff_transaction` WHERE (`transaction_type`=0 OR `transaction_type`=4 OR `transaction_type`=5 OR `transaction_type`=2)  GROUP BY staff_id having (sum(debit)-sum(credit))>5000 ORDER BY `pending`  DESC";
+       
         $result=$this->db->query($sql)->result_array();
         foreach ($result as $rs) {
-            $sql="UPDATE `staff_master` SET `status`=0,`block_reason`='Blocked due to high pending',`block_date`=CURDATE() WHERE staff_id='".$rs['staff_id']."'";
+            $sql="UPDATE `staff_master` SET `status`=0,`high_pending_block_status`=1,`block_reason`='Blocked due to high pending',`block_date`=CURDATE() WHERE staff_id='".$rs['staff_id']."'";
         
             $this->db->query($sql);
 
             $sql="INSERT INTO `staff_block_history`(`staff_id`, `reason`, `block_by`) VALUES ('".$rs['staff_id']."','Blocked due to high pending','1')";
             $this->db->query($sql);
+        }
+
+       
+    }
+
+
+    public function unblock_driver_conductor()
+    {
+        $sql="SELECT t.staff_id,sum(debit)-sum(credit) as pending FROM staff_transaction t INNER JOIN staff_master s on t.staff_id=s.staff_id    WHERE (`transaction_type`=0 OR `transaction_type`=4 OR `transaction_type`=5 OR `transaction_type`=2)  and s.status=0 and  s.high_pending_block_status=1 GROUP BY staff_id having (sum(debit)-sum(credit))<5000 ORDER BY `pending`  DESC";
+        $result=$this->db->query($sql)->result_array();
+        foreach ($result as $rs) {
+            $sql="UPDATE `staff_master` SET `status`=1,`high_pending_block_status`=0,`block_reason`='' WHERE staff_id='".$rs['staff_id']."'";
+        
+            $this->db->query($sql);
+
         }
     }
 

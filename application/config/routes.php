@@ -29,6 +29,10 @@ $route['closing'] = "master/closing";
 
 // report
 $route['print_logsheet'] = "master/print_logsheet";
+$route['print_receipt'] = "master/print_receipt";
+
+
+
 $route['logsheet'] = "report/logsheet";
 $route['tech_assign'] = "dashboard/assign_technician";
 $route['tech_de_assign'] = "dashboard/technician_de_assign";
@@ -119,6 +123,8 @@ $route['esic_statement_staff'] = "report/esic_statement_staff";
 
 $route['advance_payment'] = "master/advance_payment";
 $route['rebate'] = "master/rebate_";
+$route['receipt'] = "master/receipt_";
+
 
 $route['draft_update'] = "report/update_draft";
 // server renew reminder

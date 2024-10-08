@@ -31,7 +31,7 @@
                                         <tr>
                                             <td style="border:1px solid lightgray;text-align:center;width:20%">
                                             <input class="form-control text-center" type="text" style="text-transform: uppercase;border:0"
-                                            tabindex="0" placeholder="Vehicle No" name="vehicle_no"
+                                            tabindex="0" placeholder="Vehicle No" autocomplete="off" name="vehicle_no" 
                                                                             id="vehicle_no" required  onblur="bus_details(this);" value="AS20" autofocus onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">
                                                                 
                                             </td>
@@ -376,6 +376,13 @@ foreach($issue as $is) {
 
 </form>
 
+<form action="<?=base_url('print_receipt')?>" method="POST" id="printreceipt" hidden>
+    <input type="text" id="log_id_r" name="log_id_r">
+   
+
+
+</form>
+
 
 
 <div class="modal" tabindex="-1" id="confirmation">
@@ -478,6 +485,8 @@ bus_details=function(x)
             {
                 
                 $("#log_id").val(d['log_id']);
+                $("#log_id_r").val(d['log_id']);
+
                 $("#driver_id").val(d['driver_staff_id']);
                 $("#conductor_id").val(d['conductor_staff_id']);
 
@@ -677,7 +686,16 @@ function log_save() {
                         //    }, 1000);
 
                         // $("#log_id").val(data);
-                        $("#printsheet").submit();
+                        // $("#printsheet").submit();
+                        if(Number($("#driver_payment").val())>0 || Number($("#conductor_payment").val())>0)
+                        $("#printreceipt").submit();
+                        else 
+                        {
+                            window.setTimeout(() => {
+                            window.location.reload();
+                           }, 1000);
+                        }
+
     // return;
     //                     refresh();
     //                     $("#add").attr("disabled",false);   

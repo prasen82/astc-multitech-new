@@ -214,7 +214,9 @@
                                                         <label for="off_day" class="form-label">Off Day
                                                             </label>
                                                        <select name="off_day" id="off_day" class="form-select">
-                                                        <option value="Sunday">Sunday</option>
+                                                       <option value="None">None</option>
+                                                        
+                                                       <option value="Sunday">Sunday</option>
                                                         <option value="Monday">Monday</option>
                                                         <option value="Tuesday">Tuesday</option>
                                                         <option value="Wednesday">Wednesday</option>

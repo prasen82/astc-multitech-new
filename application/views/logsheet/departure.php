@@ -46,7 +46,7 @@
                                                     <div class="mb-3">
                                                         <label for="name" class="form-label">Driver *</label>
                                                        
-                                                        <input class="form-control" type="text"
+                                                        <input class="form-control" type="text" autocomplete="off"
                                                             placeholder="driver" name="driver_name"
                                                             id="driver_name" required oninput="staff(this,'d');">
                                                             <small class="text-info" id="d_mobile"></small>
@@ -61,7 +61,7 @@
                                                     <div class="mb-3">
                                                         <label for="name" class="form-label">Conductor *</label>
                                                         <input class="form-control" type="text"
-                                                            placeholder="conductor" name="conductor_name"
+                                                            placeholder="conductor" name="conductor_name" autocomplete="off"
                                                             id="conductor_name" required oninput="staff(this,'c');">
                                                            <small class="text-info" id="c_mobile"></small>
                                                             <div id="conductor_list" class="bg-light" style="position:absolute;width:100%;z-index:10000;max-height:200px;overflow-Y:auto;border:1px solid gray;display:none" > </div>

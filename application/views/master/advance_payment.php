@@ -9,7 +9,7 @@
                 <div class="col-6" style="margin-left:auto;margin-right:auto;">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title <?=$transaction_type==1?'text-info':'text-success'?>">
+                            <h4 class="card-title <?=$transaction_type==1?'text-info':($transaction_type==2?'text-success':'text-warning')?>">
                             <?php if($transaction_type==1){ ?>    
                             <i class="fa fa-rupee-sign " style="font-size:14pt;"></i> <?=$page_name?>
                             <?php } else {?>
@@ -276,6 +276,7 @@ function payment() {
         data: d,
 
         success: function(data) {
+            // alert(data);
             // alert(JSON.parse(data));
             
                 Swal.fire({

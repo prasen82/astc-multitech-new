@@ -107,7 +107,7 @@
                                 <tr>
                                     <td class="text-center"><?= ++$id ?></td>
                                     <?php if($type=='d' && ($this->session->userdata('multitech_role_id')==1 || $this->session->userdata('multitech_role_id')==5)){?>
-                                    <td class="text-center" id="btn<?=$st['bill_id']?>"><button class="btn btn-sm btn-success" onclick="edit_draft_bill('<?= $st['bill_id'] ?>','<?= $st['sname'] ?>','<?= $st['contact_no'] ?>','<?= $st['bank_ac_no'] ?>','<?= $st['ifsc'] ?>','<?= $st['no_of_days_work'] ?>','<?= $st['extra_days_work'] ?>','<?= $st['total_working_days'] ?>','<?= $st['total_salary_days'] ?>','<?= $st['montly_basic_wages'] ?>','<?= $st['daily_basic_wages'] ?>','<?= $st['total_wages_payable'] ?>','<?= $st['leave_wages'] ?>','<?= $st['bonus'] ?>','<?= $st['allowance'] ?>','<?= $st['gross_income'] ?>','<?= $st['pf_deduction'] ?>','<?= $st['esic_deduction'] ?>','<?= $st['p_tax'] ?>','<?= $st['advance_deduction'] ?>','<?= $st['total_deduction'] ?>','<?= $st['net_salary_payable'] ?>');"><i class="fa fa-edit"></i></button></td>
+                                    <td class="text-center" id="btn<?=$st['bill_id']?>"><button class="btn btn-sm btn-success" onclick="edit_draft_bill('<?= $st['bill_id'] ?>','<?= $st['sname'] ?>','<?= $st['contact_no'] ?>','<?= $st['bank_ac_no'] ?>','<?= $st['ifsc'] ?>','<?= $st['no_of_days_work'] ?>','<?= $st['extra_days_work'] ?>','<?= $st['total_working_days'] ?>','<?= $st['total_salary_days'] ?>','<?= $st['montly_basic_wages'] ?>','<?= $st['daily_basic_wages'] ?>','<?= $st['total_wages_payable'] ?>','<?= $st['leave_wages'] ?>','<?= $st['bonus'] ?>','<?= $st['allowance'] ?>','<?= $st['gross_income'] ?>','<?= $st['pf_deduction'] ?>','<?= $st['esic_deduction'] ?>','<?= $st['p_tax'] ?>','<?= $st['advance_deduction'] ?>','<?= $st['total_deduction'] ?>','<?= $st['net_salary_payable'] ?>','<?= $st['actual_balance_as_on_date'] ?>');"><i class="fa fa-edit"></i></button></td>
                                     <?php } ?>
 
                                     <td><?= $st['sname'] ?>
@@ -476,7 +476,9 @@
 
                                        
                                     </div>
-
+                                    <input class="form-control" type="text"
+                                                    placeholder="Salary Payable" name="actual_balance"
+                                                    id="actual_balance" readonly >
                                    
                
                   </div>
@@ -575,7 +577,7 @@
     })
    }
 
-   edit_draft_bill=function(bill_id,sname,contact_no,bank_ac_no,ifsc,no_of_days_work,extra_days_work,total_working_days,total_salary_days,montly_basic_wages,daily_basic_wages,total_wages_payable,leave_wages,bonus,allowance,gross_income,pf_deduction,esic_deduction,p_tax,advance_deduction,total_deduction,net_salary_payable)
+   edit_draft_bill=function(bill_id,sname,contact_no,bank_ac_no,ifsc,no_of_days_work,extra_days_work,total_working_days,total_salary_days,montly_basic_wages,daily_basic_wages,total_wages_payable,leave_wages,bonus,allowance,gross_income,pf_deduction,esic_deduction,p_tax,advance_deduction,total_deduction,net_salary_payable,actual_balance)
    {
     $('#loader').css("display",'block');
 
@@ -640,10 +642,12 @@
             $("#esic_deduction").val(esic_deduction);
             $("#p_tax").val(p_tax);
 
-            $("#advance_deduction").val(advance_deduction);
+            $("#advance_deduction").val(Number(advance_deduction).toFixed(2));
             $("#total_deduction").val(total_deduction);
             $("#salary_payable").val(net_salary_payable);
-        
+            $("#actual_balance").val(Number(actual_balance).toFixed(2));
+
+            
 
             $("#editModal").modal("show");
             $('#loader').css("display",'none');
@@ -686,16 +690,27 @@
            
     // var p_tax=Number($("#p_tax").val());
 
-    var advance=Number($("#advance_deduction").val());
+    var advance=Number($("#actual_balance").val());
+
+    
     var p_tax=(gross>25000?208:(gross>15000?180:(gross>10000?150:0)));
 
 
     var total_deduction=Number(pf_deduction)+advance+Number(esic_deduction)+p_tax;
 
     var net_payable=gross-total_deduction;
+
+            if(net_payable<0)
+            {
+                total_deduction+=net_payable;
+                advance+=net_payable;
+                net_payable=0;
+            }
+
+
     var employers_pf_contribution=(total_wages*Number($("#global_pf_employer_contribution").val())/100).toFixed(2);
     
-
+    $("#advance_deduction").val(advance.toFixed(2));
     $("#p_tax").val(p_tax);
     $("#total_salary_days").val(total_salary_days);
     $("#total_wages").val(total_wages);

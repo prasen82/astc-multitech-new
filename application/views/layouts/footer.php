@@ -391,6 +391,8 @@
 
 <form id="payment" action="<?php echo base_url('advance_payment') ?>" method="POST"></form>
 <form id="rebate" action="<?php echo base_url('rebate') ?>" method="POST"></form>
+<form id="receipt" action="<?php echo base_url('receipt') ?>" method="POST"></form>
+
 <!-- penalty -->
 <form id="driver_penalty" action="<?php echo base_url('driver_penalty') ?>" method="POST"></form>
 <form id="conductor_penalty" action="<?php echo base_url('conductor_penalty') ?>" method="POST"></form>
